@@ -1,11 +1,5 @@
 set runtimepath+=~/.vim_runtime
 
-"source ~/.vim_runtime/vimrcs/basic.vim
-"source ~/.vim_runtime/vimrcs/filetypes.vim
-"source ~/.vim_runtime/vimrcs/plugins_config.vim
-""source ~/.vim_runtime/vimrcs/extended.vim
-
-"source ~/.vim_runtime/my_configs.vim
 "inoremap jj <Esc>
 
 nnoremap <C-J> <C-W><C-J>
@@ -41,12 +35,8 @@ Plug 'fatih/molokai'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-"Plug 'Shougo/deoplete.nvim'
-"Plug 'zchee/deoplete-go', { 'do': 'make'}
-
 Plug 'Valloric/YouCompleteMe'
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 call plug#end()
