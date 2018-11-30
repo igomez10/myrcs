@@ -2,6 +2,7 @@ set runtimepath+=~/.vim_runtime
 
 "inoremap jj <Esc>
 
+map q <Nop>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -37,6 +38,7 @@ Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+
 Plug 'Valloric/YouCompleteMe'
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 call plug#end()
@@ -73,7 +75,7 @@ set completeopt=menu,menuone    " Show popup menu, even if there is one entry
 set pumheight=10                " Completion window max size
 set nocursorcolumn              " Do not highlight column (speeds up highlighting)
 set nocursorline                " Do not highlight cursor (speeds up highlighting)
-"set lazyredraw                  " Wait to redraw
+set lazyredraw                  " Wait to redraw
 
 " Enable to copy to clipboard for operations like yank, delete, change and put
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
@@ -133,6 +135,7 @@ autocmd BufEnter * silent! lcd %:p:h
 """""""""""""""""""""
 
 " vim-go
+let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
@@ -209,7 +212,7 @@ let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_deadline = "10s"
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
-set updatetime=50
+set updatetime=750
 
 " Start autocompletion after 1 chars
 let g:ycm_min_num_of_chars_for_completion = 1
@@ -218,6 +221,4 @@ let g:ycm_enable_diagnostic_highlighting = 0
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
-
-
 
