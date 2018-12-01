@@ -207,7 +207,7 @@ autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_autosave = 1
+"let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_deadline = "10s"
 let g:go_auto_type_info = 1
