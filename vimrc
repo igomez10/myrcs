@@ -38,8 +38,8 @@ Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'w0rp/ale'
 call plug#end()
 
 
@@ -71,7 +71,7 @@ set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not it begins with upper case
 set completeopt=menu,menuone    " Show popup menu, even if there is one entry
-set pumheight=10                " Completion window max size
+set pumheight=20                " Completion window max size
 set nocursorcolumn              " Do not highlight column (speeds up highlighting)
 set nocursorline                " Do not highlight cursor (speeds up highlighting)
 set lazyredraw                  " Wait to redraw
@@ -207,10 +207,9 @@ autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_deadline = "10s"
 let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
 set updatetime=50
 
 set completeopt+=menuone,noselect,noinsert
