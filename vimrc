@@ -40,6 +40,8 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'w0rp/ale'
+Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 
