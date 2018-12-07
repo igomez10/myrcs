@@ -12,10 +12,6 @@ let mapleader = ","
 set backspace=2 " make backspace work like most other programs
 set backspace=indent,eol,start
 set wildmenu
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch 
 set showmatch 
 syntax enable 
 set expandtab
@@ -23,9 +19,7 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-set laststatus=2
 nmap <leader>w :w!<cr>
-execute pathogen#infect()
 
 set mouse=nicr
 set scrolloff=0
@@ -42,6 +36,7 @@ Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink
 Plug 'w0rp/ale'
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'zxqfl/tabnine-vim'
 call plug#end()
 
 
@@ -76,7 +71,7 @@ set completeopt=menu,menuone    " Show popup menu, even if there is one entry
 set pumheight=20                " Completion window max size
 set nocursorcolumn              " Do not highlight column (speeds up highlighting)
 set nocursorline                " Do not highlight cursor (speeds up highlighting)
-set lazyredraw                  " Wait to redraw
+"set lazyredraw                  " Wait to redraw
 
 " Enable to copy to clipboard for operations like yank, delete, change and put
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
@@ -114,18 +109,18 @@ map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
-noremap <Up> gk
-noremap <Down> gj
-noremap j gj
-noremap k gk
+"noremap <Up> gk
+"noremap <Down> gj
+"noremap j gj
+"noremap k gk
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+"nnoremap n nzzzv
+"nnoremap N Nzzzv
 
 " Act like D and C
-nnoremap Y y$
+"nnoremap Y y$
 
 " Enter automatically into the files directory
 autocmd BufEnter * silent! lcd %:p:h
@@ -141,12 +136,12 @@ let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
 
-"let g:go_highlight_types = 1
-"let g:go_highlight_fields = 1
-"let g:go_highlight_functions = 1
-"let g:go_highlight_function_calls = 1
-"let g:go_highlight_extra_types = 1
-"let g:go_highlight_generate_tags = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
 
 " Open :GoDeclsDir with ctrl-g
 nmap <C-g> :GoDeclsDir<cr>
@@ -207,12 +202,12 @@ set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+"let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
+"let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_deadline = "10s"
 let g:go_auto_type_info = 1
-set updatetime=50
+set updatetime=500
 
 set completeopt+=menuone,noselect,noinsert
 
@@ -224,3 +219,18 @@ function! OpenCompletion()
 endfunction
 
 autocmd InsertCharPre * call OpenCompletion()
+
+"map ^[OA <up>
+"map ^[OB <down>
+"map ^[OC <right>
+"map ^[OD <left>
+
+let g:goyo_width = 100
+
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+" Enable integration with airline.
+"let g:airline#extensions#ale#enabled = 1
+
