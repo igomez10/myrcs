@@ -220,17 +220,14 @@ endfunction
 
 autocmd InsertCharPre * call OpenCompletion()
 
-"map ^[OA <up>
-"map ^[OB <down>
-"map ^[OC <right>
-"map ^[OD <left>
-
 let g:goyo_width = 100
 
 
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
-" Enable integration with airline.
-"let g:airline#extensions#ale#enabled = 1
+
+
+" Show hidden files in NERDtree
+let NERDTreeShowHidden=1
 
