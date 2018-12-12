@@ -28,7 +28,6 @@ call plug#begin()
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'fatih/molokai'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -36,7 +35,6 @@ Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink
 Plug 'w0rp/ale'
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'zxqfl/tabnine-vim'
 call plug#end()
 
 
@@ -85,7 +83,7 @@ vnoremap <C-c> :w !pbcopy<CR><CR> noremap <C-v> :r !pbpaste<CR><CR>
 " This enables us to undo files even if you exit Vim.
 if has('persistent_undo')
   set undofile
-  set undodir=~/.config/vim/tmp/undo//
+  set undodir=~/.vim/undo
 endif
 
 " Colorscheme
