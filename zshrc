@@ -3,7 +3,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ignacio/.oh-my-zsh"
+export ZSH="/Users/igomez/.oh-my-zsh"
 
 ZSH_THEME=""
 
@@ -28,13 +28,7 @@ prompt pure
 
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
-
+export EDITOR='vim'
 alias k='kubectl'
 alias kg='kubectl get'
 alias kgpo='kubectl get pod'
@@ -43,6 +37,10 @@ alias kgpo='kubectl get pod'
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 
 #autoload -U edit-command-line
 #
@@ -54,12 +52,6 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ignacio/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ignacio/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/ignacio/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ignacio/google-cloud-sdk/completion.zsh.inc'; fi
 
 if [ $commands[helm] ]; then
   source <(helm completion zsh)
@@ -81,3 +73,9 @@ export LESS=' -R -X -F '
 
 
 #zprof
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/igomez/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/igomez/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/igomez/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/igomez/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
