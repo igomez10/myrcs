@@ -21,8 +21,8 @@ set tabstop=2
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nmap <leader>w :w!<cr>
 
-set mouse=nicr
-set scrolloff=0
+"set mouse=nicr
+"set scrolloff=0
 
 call plug#begin()
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -133,7 +133,6 @@ autocmd BufEnter * silent! lcd %:p:h
 let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -203,8 +202,8 @@ set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 let g:go_metalinter_enabled = ['golint']
 let g:go_metalinter_autosave = 1
-"let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_deadline = "10s"
+let g:go_metalinter_autosave_enabled = ['vet', 'golint' ]
+let g:go_metalinter_deadline = "5s"
 "let g:go_auto_type_info = 1
 set updatetime=500
 

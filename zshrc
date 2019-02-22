@@ -3,7 +3,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/igomez/.oh-my-zsh"
+export ZSH="/Users/ignacio/.oh-my-zsh"
 
 ZSH_THEME=""
 
@@ -75,7 +75,7 @@ export LESS=' -R -X -F '
 #zprof
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/igomez/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/igomez/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+if [ -f '/Users/ignacio/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/igomez/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/igomez/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
+if [ -f '/Users/ignacio/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
