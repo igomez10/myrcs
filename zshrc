@@ -79,3 +79,15 @@ if [ -f '/Users/ignacio/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/U
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ignacio/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
+
+
+alias vi="/usr/local/bin/vim"
+alias vim="/usr/local/bin/vim"
+alias python=python3
+alias vim=nvim
+alias vimdiff="nvim -d"
+export KEYTIMEOUT=1
+
+alias gostart="cd /Users/ignacio/go/src/github.com/igomez10"
+alias weather="curl wttr.in"
+
