@@ -40,6 +40,11 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ervandew/supertab'
 Plug 'sebdah/vim-delve'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Raimondi/delimitMate'
 call plug#end()
 
 
@@ -73,9 +78,10 @@ set smartcase                   " ... but not it begins with upper case
 set pumheight=10                " Completion window max size
 set lazyredraw                  " Wait to redraw
 set completeopt=menu,menuone,noselect
-
 set nu
 set clipboard=unnamed
+set timeoutlen=1000 ttimeoutlen=0 "Fast escape
+
 
 
 " This enables us to undo files even if you exit Vim.
@@ -104,7 +110,9 @@ let mapleader = ","
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
-let g:go_list_type = "quickfix"
+nnoremap <silent> <leader>q :Sayonara<CR>
+
+
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 "noremap <Up> gk
@@ -133,22 +141,26 @@ autocmd BufEnter * silent! lcd %:p:h
 let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
-"let g:go_auto_sameids = 1
-
+let g:go_term_enabled = 0
+let g:go_highlight_operators = 0
+let g:go_highlight_build_constraints = 1
+let g:go_list_type = "quickfix"
+let g:go_jump_to_error = 0
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
+"let g:go_auto_sameids = 1
 
 " Open :GoDeclsDir with ctrl-g
 nmap <C-g> :GoDeclsDir<cr>
 imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 
 
-autocmd FileType yaml set listchars=tab:\|\ set list
-autocmd FileType yml set listchars=tab:\|\ set list
+autocmd FileType yaml set listchars=tab:\|\ 
+autocmd FileType yml set listchars=tab:\|\ 
 
 
 
@@ -251,3 +263,10 @@ augroup LspGo
 endfunction
  " autocmd FileType go autocmd InsertCharPre *  call OpenCompletion()
 augroup END
+
+" ==================== delimitMate ====================
+let g:delimitMate_expand_cr = 1   
+let g:delimitMate_expand_space = 1    
+let g:delimitMate_smart_quotes = 1    
+let g:delimitMate_expand_inside_quotes = 0    
+let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'   

@@ -57,13 +57,13 @@ if [ $commands[helm] ]; then
   source <(helm completion zsh)
 fi
 
-function kubectl() {
-    if ! type __start_kubectl >/dev/null 2>&1; then
-        source <(command kubectl completion zsh)
-    fi
-
-    command kubectl "$@"
-}
+#function kubectl() {
+#    if ! type __start_kubectl >/dev/null 2>&1; then
+#        source <(command kubectl completion zsh)
+#    fi
+#
+#    command kubectl "$@"
+#}
 
 #if [ /Users/ignacio/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
@@ -73,12 +73,6 @@ export LESS=' -R -X -F '
 
 
 #zprof
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ignacio/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/ignacio/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
 
 
 alias vi="/usr/local/bin/vim"
@@ -91,3 +85,13 @@ export KEYTIMEOUT=1
 alias gostart="cd /Users/ignacio/go/src/github.com/igomez10"
 alias weather="curl wttr.in"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export GO111MODULE=on
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ignacio/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ignacio/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
