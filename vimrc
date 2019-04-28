@@ -8,6 +8,7 @@ inoremap <Up>    <NOP>
 inoremap <Down>  <NOP>
 inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
+"tnoremap <Esc> <C-\><C-n>
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -261,7 +262,7 @@ augroup LspGo
         call feedkeys("\<C-x>\<C-o>")
     endif
 endfunction
- " autocmd FileType go autocmd InsertCharPre *  call OpenCompletion()
+"autocmd FileType go autocmd InsertCharPre *  call OpenCompletion()
 augroup END
 
 " ==================== delimitMate ====================

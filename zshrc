@@ -28,7 +28,7 @@ prompt pure
 
 export LANG=en_US.UTF-8
 
-export EDITOR='vim'
+export EDITOR='nvim'
 alias k='kubectl'
 alias kg='kubectl get'
 alias kgpo='kubectl get pod'
@@ -95,3 +95,5 @@ if [ -f '/Users/ignacio/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ignacio/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias fzf="vim $(fzf -m --preview 'bat --style=numbers --color=always {}' ) -O"
