@@ -46,6 +46,13 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Raimondi/delimitMate'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/indentLine'
+Plug 'elzr/vim-json'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 
@@ -271,3 +278,6 @@ let g:delimitMate_expand_space = 1
 let g:delimitMate_smart_quotes = 1    
 let g:delimitMate_expand_inside_quotes = 0    
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'   
+
+" Supertab autocompletion
+let g:SuperTabDefaultCompletionType = "context"

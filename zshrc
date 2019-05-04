@@ -75,11 +75,16 @@ export LESS=' -R -X -F '
 #zprof
 
 
-alias vi="/usr/local/bin/vim"
-alias vim="/usr/local/bin/vim"
+alias vi=nvim
+alias vim=nvim
 alias python=python3
 alias vim=nvim
 alias vimdiff="nvim -d"
+alias cat=bat
+alias ping='prettyping --nolegend'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias help='tldr'
 export KEYTIMEOUT=1
 
 alias gostart="cd /Users/ignacio/go/src/github.com/igomez10"
@@ -96,4 +101,7 @@ if [ -f '/Users/ignacio/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ignacio/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ignacio/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-alias fzf="vim $(fzf -m --preview 'bat --style=numbers --color=always {}' ) -O"
+#alias fzf="vim $(fzf -m --preview 'bat --style=numbers --color=always {}' ) -O"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
