@@ -115,8 +115,8 @@ let mapleader = ","
 
 " Jump to next error with Ctrl-n and previous error with Ctrl-m. Close the
 " quickfix window with <leader>a
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
+map <leader>n :cnext<CR>
+map <leader>m :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 nnoremap <silent> <leader>q :Sayonara<CR>
 
