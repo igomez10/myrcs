@@ -26,8 +26,8 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-nmap <leader>w :w!<cr>
-"set mouse=nicr
+nmap <leader>w :w<cr>
+set mouse=nicr
 "set scrolloff=0
 
 call plug#begin()
@@ -105,6 +105,7 @@ let g:rehash256 = 1
 let g:molokai_original = 1
 let term="xterm2"
 colorscheme molokai
+set background=dark
 
 """"""""""""""""""""""
 "      Mappings      "
@@ -115,8 +116,8 @@ let mapleader = ","
 
 " Jump to next error with Ctrl-n and previous error with Ctrl-m. Close the
 " quickfix window with <leader>a
-map <leader>n :cnext<CR>
-map <leader>m :cprevious<CR>
+"map <leader>n :cnext<CR>
+"map <leader>m :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 nnoremap <silent> <leader>q :Sayonara<CR>
 
@@ -150,7 +151,7 @@ let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_term_enabled = 0
-let g:go_highlight_operators = 0
+let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_list_type = "quickfix"
 let g:go_jump_to_error = 0
@@ -231,7 +232,7 @@ let g:go_metalinter_enabled = ['golint']
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['vet', 'golint' ]
 let g:go_metalinter_deadline = "5s"
-"let g:go_auto_type_info = 1
+let g:go_auto_type_info = 1
 set updatetime=500
 
 
@@ -276,7 +277,7 @@ augroup END
 let g:delimitMate_expand_cr = 1   
 let g:delimitMate_expand_space = 1    
 let g:delimitMate_smart_quotes = 1    
-let g:delimitMate_expand_inside_quotes = 0    
+let g:delimitMate_expand_inside_quotes = 0
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'   
 
 " Supertab autocompletion
