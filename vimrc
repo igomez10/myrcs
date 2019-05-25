@@ -28,7 +28,7 @@ set tabstop=2
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nmap <leader>w :w<cr>
 set mouse=nicr
-"set scrolloff=0
+set scrolloff=10
 
 call plug#begin()
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -53,8 +53,23 @@ Plug 'Yggdroot/indentLine'
 Plug 'elzr/vim-json'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plug 'majutsushi/tagbar'
 call plug#end()
 
+" Deoplete 
+" Enable deoplete when InsertEnter.
+let g:deoplete#enable_at_startup = 0
+autocmd InsertEnter * call deoplete#enable()
+autocmd InsertEnter * call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 """"""""""""""""""""""
 "      Settings      "
@@ -211,6 +226,7 @@ augroup go
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
 augroup END
 
 " build_go_files is a custom function that builds or compiles the test file.
@@ -230,9 +246,12 @@ set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 let g:go_metalinter_enabled = ['golint']
 let g:go_metalinter_autosave = 0
-let g:go_metalinter_autosave_enabled = ['vet', 'golint' ]
-let g:go_metalinter_deadline = "5s"
-let g:go_auto_type_info = 1
+let g:go_metalinter_deadline = '20s'
+let g:go_metalinter_enabled = ['golint', 'vetshadow', 'errcheck', 'ineffassign', 'vet', 'goimports', 'defercheck', 'aligncheck', 'dupl', 'gofmt', 'varcheck', 'gocyclo', 'testify', 'structcheck', 'deadcode']
+let g:go_auto_type_info = 0
+let g:go_def_mode = 'gopls'
+let g:go_def_reuse_buffer = 1
+
 set updatetime=500
 
 
@@ -241,8 +260,8 @@ set updatetime=500
 let g:goyo_width = 100
 
 " Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
+"let g:ale_sign_error = '⤫'
+"let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 
@@ -282,3 +301,50 @@ let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 " Supertab autocompletion
 let g:SuperTabDefaultCompletionType = "context"
+
+
+" TagBar
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+
+" GitGutter
+set signcolumn=yes "prefer always visible, render issues with autocompletion
+
+
+" CtrlP
+"let g:ctrlp_root_markers = ['.ctrlp_go']
+"let g:ctrlp_user_command = {
+"  \ 'types': {
+"    \ 1: ['.ctrlp_go', 'cd %s && find ../ -type f -not -path "*/.git/*" -not -path "*/Godeps/*" -not -path "*/misc/package/dist_package/*"'],
+"    \ 2: ['.git/', 'cd %s && git ls-files . -co --exclude-standard'],
+"  \ }
+"  \ }
+"
+
+" set python3 bin
+let g:python3_host_prog = '/usr/local/bin/python3'
