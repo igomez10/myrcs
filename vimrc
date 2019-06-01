@@ -26,7 +26,7 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-nmap <leader>w :w<cr>
+nmap <leader>w :update<cr>
 set mouse=nicr
 set scrolloff=10
 
@@ -63,6 +63,7 @@ else
 endif
 
 Plug 'majutsushi/tagbar'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " Deoplete 
@@ -250,7 +251,7 @@ let g:go_metalinter_deadline = '20s'
 let g:go_metalinter_enabled = ['golint', 'vetshadow', 'errcheck', 'ineffassign', 'vet', 'goimports', 'defercheck', 'aligncheck', 'dupl', 'gofmt', 'varcheck', 'gocyclo', 'testify', 'structcheck', 'deadcode']
 let g:go_auto_type_info = 0
 let g:go_def_mode = 'gopls'
-let g:go_def_reuse_buffer = 1
+let g:go_def_reuse_buffer = 0
 
 set updatetime=500
 
@@ -335,16 +336,20 @@ let g:tagbar_type_go = {
 " GitGutter
 set signcolumn=yes "prefer always visible, render issues with autocompletion
 
-
-" CtrlP
-"let g:ctrlp_root_markers = ['.ctrlp_go']
-"let g:ctrlp_user_command = {
-"  \ 'types': {
-"    \ 1: ['.ctrlp_go', 'cd %s && find ../ -type f -not -path "*/.git/*" -not -path "*/Godeps/*" -not -path "*/misc/package/dist_package/*"'],
-"    \ 2: ['.git/', 'cd %s && git ls-files . -co --exclude-standard'],
-"  \ }
-"  \ }
-"
-
 " set python3 bin
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
+let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+

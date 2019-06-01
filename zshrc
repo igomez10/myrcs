@@ -130,4 +130,12 @@ _python_argcomplete() {
 }
 complete -o nospace -F _python_argcomplete "az"
 
+alias morning="open -na 'Google Chrome' --args --new-window --window-size=100,400 https://bloomberg.com \
+open -na 'Google Chrome' --args --new-window --window-size=100,400 https://nytimes.com"
 
+# nvr to open files inside neovim terminal mode
+if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+  alias h='nvr -o'
+  alias v='nvr -O'
+  alias t='nvr --remote-tab'
+fi
