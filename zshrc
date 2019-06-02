@@ -139,3 +139,6 @@ if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
   alias v='nvr -O'
   alias t='nvr --remote-tab'
 fi
+
+# added by travis gem
+[ -f /Users/ignacio/.travis/travis.sh ] && source /Users/ignacio/.travis/travis.sh

@@ -31,10 +31,10 @@ set mouse=nicr
 set scrolloff=10
 
 call plug#begin()
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries',  'tag':'*' }
 Plug 'fatih/molokai'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', {'tag':'*'}
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'prabirshrestha/async.vim'
@@ -64,6 +64,7 @@ endif
 
 Plug 'majutsushi/tagbar'
 Plug 'vim-syntastic/syntastic'
+
 call plug#end()
 
 " Deoplete 
@@ -352,4 +353,7 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
 let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+" open terminal in split mode
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
 
