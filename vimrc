@@ -65,6 +65,13 @@ endif
 Plug 'majutsushi/tagbar'
 Plug 'vim-syntastic/syntastic'
 
+
+" Typescript plugins
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" For Denite features
+Plug 'Shougo/denite.nvim'
+
 call plug#end()
 
 " Deoplete 
@@ -357,3 +364,5 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
+
+" TypeScript
