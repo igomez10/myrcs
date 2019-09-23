@@ -1,14 +1,4 @@
 map q <Nop>
-" don't use arrowkeys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
-"tnoremap <Esc> <C-\><C-n>
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -19,22 +9,19 @@ let mapleader = ","
 set backspace=2 " make backspace work like most other programs
 set backspace=indent,eol,start
 set wildmenu
-set showmatch 
-syntax enable 
+set showmatch
 set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nmap <leader>w :update<cr>
 set mouse=nicr
-set scrolloff=10
+set scrolloff=5
 
 call plug#begin()
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries',  'tag':'*' }
 Plug 'fatih/molokai'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'w0rp/ale', {'tag':'*'}
+Plug 'dense-analysis/ale'
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'prabirshrestha/async.vim'
@@ -42,7 +29,6 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'ervandew/supertab'
 Plug 'sebdah/vim-delve'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Raimondi/delimitMate'
@@ -53,37 +39,27 @@ Plug 'Yggdroot/indentLine'
 Plug 'elzr/vim-json'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
+Plug 'junegunn/limelight.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mbbill/undotree'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'majutsushi/tagbar'
+Plug 'fatih/vim-go'
+Plug 'ervandew/supertab'
 Plug 'vim-syntastic/syntastic'
-
-
-" Typescript plugins
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" For Denite features
-Plug 'Shougo/denite.nvim'
-
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
-
-" Deoplete 
-" Enable deoplete when InsertEnter.
-let g:deoplete#enable_at_startup = 0
-autocmd InsertEnter * call deoplete#enable()
-autocmd InsertEnter * call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 """"""""""""""""""""""
 "      Settings      "
 """"""""""""""""""""""
-set nocompatible                " Enables us Vim specific features
+set nocompatible                " Enables us Vim specific features, it's ok to break compatibility with vi
 filetype off                    " Reset filetype detection first ...
 filetype plugin indent on       " ... and enable filetype detection
 set ttyfast                     " Indicate fast terminal conn for faster redraw
@@ -109,12 +85,11 @@ set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not it begins with upper case
 set pumheight=10                " Completion window max size
 set lazyredraw                  " Wait to redraw
-set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,preview
+set previewheight=1             " Set the size of the autocompletion preview to 1 line
 set nu
-set clipboard=unnamed
-set timeoutlen=1000 ttimeoutlen=0 "Fast escape
-
-
+set clipboard=unnamedplus
+set timeoutlen=1000 ttimeoutlen=1 "Fast escape
 
 " This enables us to undo files even if you exit Vim.
 if has('persistent_undo')
@@ -146,13 +121,6 @@ nnoremap <leader>a :cclose<CR>
 nnoremap <silent> <leader>q :Sayonara<CR>
 
 
-
-" Visual linewise up and down by default (and use gj gk to go quicker)
-"noremap <Up> gk
-"noremap <Down> gj
-"noremap j gj
-"noremap k gk
-
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 nnoremap n nzzzv
@@ -160,11 +128,6 @@ nnoremap N Nzzzv
 
 " Act like D and C
 "nnoremap Y y$
-
-" Enter automatically into the files directory
-autocmd BufEnter * silent! lcd %:p:h
-
-
 
 """""""""""""""""""""
 "      Plugins      "
@@ -186,16 +149,14 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
 "let g:go_auto_sameids = 1
+let go_doc_popup_window = 1
 
 " Open :GoDeclsDir with ctrl-g
 nmap <C-g> :GoDeclsDir<cr>
 imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 
-
-autocmd FileType yaml set listchars=tab:\|\ 
-autocmd FileType yml set listchars=tab:\|\ 
-
-
+autocmd FileType yaml set listchars=tab:\|\
+autocmd FileType yml set listchars=tab:\|\
 
 augroup go
   autocmd!
@@ -254,23 +215,19 @@ set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 
 let g:go_metalinter_enabled = ['golint']
-let g:go_metalinter_autosave = 0
-let g:go_metalinter_deadline = '20s'
-let g:go_metalinter_enabled = ['golint', 'vetshadow', 'errcheck', 'ineffassign', 'vet', 'goimports', 'defercheck', 'aligncheck', 'dupl', 'gofmt', 'varcheck', 'gocyclo', 'testify', 'structcheck', 'deadcode']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_deadline = '8s'
+let g:go_metalinter_enabled = ['golint', 'vetshadow', 'errcheck', 'ineffassign', 'vet', 'goimports',  'dupl', 'gofmt', 'varcheck', 'gocyclo', 'structcheck', 'deadcode']
 let g:go_auto_type_info = 0
-let g:go_def_mode = 'gopls'
 let g:go_def_reuse_buffer = 0
 
-set updatetime=500
-
-
-
+set updatetime=700
 
 let g:goyo_width = 100
 
 " Error and warning signs.
-"let g:ale_sign_error = '⤫'
-"let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 
@@ -278,39 +235,33 @@ let g:airline#extensions#ale#enabled = 1
 " Show hidden files in NERDtree
 let NERDTreeShowHidden=1
 
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('go', 'blue', 'none', '#3366FF', '#151515')
 
 set statusline=%F:%l/%L
 
-augroup LspGo
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'go-lang',
-      \ 'cmd': {server_info->['gopls']},
-      \ 'whitelist': ['go'],
-      \ })
-  autocmd FileType go setlocal omnifunc=lsp#complete
-  autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
-  autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
-  autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
-    function! OpenCompletion()
-    "if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z') || (v:char == '.')  )
-    if !pumvisible() && (v:char == '.' )
-        call feedkeys("\<C-x>\<C-o>")
-    endif
-endfunction
-"autocmd FileType go autocmd InsertCharPre *  call OpenCompletion()
-augroup END
-
 " ==================== delimitMate ====================
-let g:delimitMate_expand_cr = 1   
-let g:delimitMate_expand_space = 1    
-let g:delimitMate_smart_quotes = 1    
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_smart_quotes = 1
 let g:delimitMate_expand_inside_quotes = 0
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'   
+let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 " Supertab autocompletion
-let g:SuperTabDefaultCompletionType = "context"
-
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " TagBar
 let g:tagbar_type_go = {
@@ -356,13 +307,75 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
-let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
+let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'gometalinter']
+"let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 
 " open terminal in split mode
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
+vnoremap  <leader>y  "+y
 
-" TypeScript
+if has('nvim')
+  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+endif
+
+autocmd FileType gitcommit set bufhidden=delete
+
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|vendor'
+let g:ctrlp_max_files=100000
+let g:ctrlp_max_depth=1000
+let g:ctrlp_by_filename = 1
+
+augroup DragQuickfixWindowDown
+    autocmd!
+    autocmd FileType qf wincmd J
+augroup end
+
+set cursorline
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+set path+=**
+" Tweaks for browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+command Q q
+command Qa qa
+command QA qa
+command WQ wq
+command W w
+
+let g:goyo_width = 100
+let g:ctrlp_working_path_mode = 'ra'
+imap jj <Esc>
+nnoremap * *``
+command Sesource :split ~/.config/nvim/init.vim
+command Vesource :vsplit ~/.config/nvim/init.vim
+command SourceSource :source ~/.config/nvim/init.vim
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+set noshowmode
+let g:bufferline_echo = 0
+"set ambiwidth=double
+let g:airline_skip_empty_sections = 1
+
+let g:ale_fix_on_save = 1
+" In ~/.vim/vimrc, or somewhere similar.
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'go': ['gofmt','goimports']
+\}
