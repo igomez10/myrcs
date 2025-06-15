@@ -1,93 +1,169 @@
-# Path to your oh-my-zsh installation.
-ZSH_DISABLE_COMPFIX=true
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME=""
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="random"
 
-COMPLETION_WAITING_DOTS="true"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-DISABLE_UPDATE_PROMPT=true
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-syntax-highlighting
-  zsh-completions
-  zsh-autosuggestions
-  docker
-#  kubectl
+
+git
+zsh-autosuggestions
+docker
+docker-compose
+golang
+iterm2
+kubectl
+macos
+mongocli
+ssh
+vscode
+brew
+
 )
 
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch $(uname -m)"
+
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+autoload -Uz compinit
+compinit
+
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# save history
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt appendhistory
+
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/16/bin/
+export PATH=$PATH:/opt/homebrew/bin
+# for using brew make instead of deafult make
+export PATH=$PATH:$HOMEBREW_PREFIX/opt/make/libexec/gnubin
+export PATH=$PATH:~/.local/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:/opt/homebrew/opt/llvm/bin
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 export EDITOR='nvim'
+export GOPATH=$HOME/go
+export KEYTIMEOUT=1
+export GO111MODULE=on
+# export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+export TESTCONTAINERS_RYUK_DISABLED=true
+
 alias k='kubectl'
 alias kg='kubectl get'
 alias kgpo='kubectl get pod'
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export KEYTIMEOUT=1
-export GO111MODULE=on
-
-export PATH=$PATH:$HOME/.cargo/bin
-
 alias vi=nvim
 alias vim=nvim
-#alias vim=/usr/bin/vim.basic
-alias python=python3
+# alias python=python3
+# alias python3=/usr/local/bin/python3
 alias vimdiff="nvim -d"
 alias cat=bat
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias du="ncdu  --color dark -rr -x --exclude .git --exclude node_modules"
 alias help='tldr'
-alias gostart="cd $HOME/go/src/github.com/igomez10"
-alias weather="curl wttr.in"
+alias bash=/opt/homebrew/bin/bash
 
-# nvr to open files inside neovim terminal mode
-if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
-  alias h='nvr -o'
-  alias v='nvr -O'
-  alias t='nvr --remote-tab'
-fi
-#
-# added by travis gem
-[ -f "$HOME/.travis/travis.sh" ] && source $HOME/.travis/travis.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim
-
-fpath+=('$PWD/functions')
-fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
-autoload -U promptinit; promptinit
-prompt pure
-
-
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
-source $ZSH/oh-my-zsh.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
-
-#reuse docker host as docker for k8s
-#eval $(minikube docker-env)
-alias git-root='cd $(git rev-parse --show-cdup)'
-
-source $HOME/.local/bin/aws_zsh_completer.sh
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 source <(kubectl completion zsh)
-fpath=($fpath ~/.zsh/completion)
+source <(restish completion zsh)
 
-alias ping=prettyping
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/i.gomez.4/.sdkman"
+[[ -s "/Users/i.gomez.4/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/i.gomez.4/.sdkman/bin/sdkman-init.sh"
 
-autoload -U compinit
-compinit
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
-alias tf=terraform
+eval "$(atuin init zsh)"
